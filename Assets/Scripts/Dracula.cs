@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dracula: MonoBehaviour {
   [SerializeField] Rigidbody2D _rigidbody2D;
@@ -22,7 +23,16 @@ public class Dracula: MonoBehaviour {
   bool _isHuman = true;
   public float speed = 6f;
 
+  float _batTimer = 0f;
+
   void Update() {
+    if (!_isHuman) {
+      _batTimer -= Time.deltaTime;
+      if (_batTimer <= 0f) {
+        ToggleForm();
+      }
+    }
+
     var transformKeyDown = Input.GetKeyDown(KeyCode.Space);
     var runDown = Input.GetKey(KeyCode.S);
     var runUp = Input.GetKey(KeyCode.W);
@@ -60,6 +70,7 @@ public class Dracula: MonoBehaviour {
       _boxCollider.offset = _boxColliderOffsetWhenBat;
       _audioSource.PlayOneShot(_transformIntoHumanSoundEffect);
       _spriteRenderer.sprite = _batSprite;
+      _batTimer = 2f;
     }
   }
 }
