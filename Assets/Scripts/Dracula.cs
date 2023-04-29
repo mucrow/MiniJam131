@@ -12,34 +12,38 @@ public class Dracula: MonoBehaviour {
   [SerializeField] AudioSource _audioSource;
 
   bool _isHuman = true;
+  public float speed = 4f;
 
   void Update() {
     var transformKeyDown = Input.GetKeyDown(KeyCode.Space);
-    var runDown = Input.GetKey(KeyCode.A);
+    var runDown = Input.GetKey(KeyCode.S);
     var runUp = Input.GetKey(KeyCode.W);
     var runLeft = Input.GetKey(KeyCode.A);
     var runRight = Input.GetKey(KeyCode.D);
 
-    var moveInput = new Vector2();
+    var moveInput = transform.position;
+
     if (runLeft) {
-      moveInput.x -= 1f;
+      moveInput.x -= speed * Time.deltaTime;
     }
     if (runRight) {
-      moveInput.x += 1f;
+      moveInput.x += speed * Time.deltaTime;
     }
     if (runDown) {
-      moveInput.y -= 1f;
+      moveInput.y -= speed * Time.deltaTime;
     }
     if (runUp) {
-      moveInput.y += 1f;
+      moveInput.y += speed * Time.deltaTime;
     }
 
-    if (transformKeyDown) {
-      ToggleForm();
-    }
+    // if (transformKeyDown) {
+    //   ToggleForm();
+    // }
+
+    transform.position = moveInput;
   }
 
-  void ToggleForm() {
+  public void ToggleForm() {
     _isHuman = !_isHuman;
     if (_isHuman) {
       _audioSource.PlayOneShot(_transformIntoBatSoundEffect);
