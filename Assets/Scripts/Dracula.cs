@@ -13,8 +13,14 @@ public class Dracula: MonoBehaviour {
   [SerializeField] AudioClip _transformIntoHumanSoundEffect;
   [SerializeField] AudioSource _audioSource;
 
+  [SerializeField] BoxCollider2D _boxCollider;
+  [SerializeField] Vector2 _boxColliderOffsetWhenBat;
+  [SerializeField] Vector2 _boxColliderSizeWhenBat;
+  [SerializeField] Vector2 _boxColliderOffsetWhenHuman;
+  [SerializeField] Vector2 _boxColliderSizeWhenHuman;
+
   bool _isHuman = true;
-  public float speed = 4f;
+  public float speed = 6f;
 
   void Update() {
     var transformKeyDown = Input.GetKeyDown(KeyCode.Space);
@@ -38,20 +44,20 @@ public class Dracula: MonoBehaviour {
       moveInput.y += 1;
     }
 
-    // if (transformKeyDown) {
-    //   ToggleForm();
-    // }
-
     _rigidbody2D.velocity = moveInput.normalized * speed;
   }
 
   public void ToggleForm() {
     _isHuman = !_isHuman;
     if (_isHuman) {
+      _boxCollider.size = _boxColliderSizeWhenHuman;
+      _boxCollider.offset = _boxColliderOffsetWhenHuman;
       _audioSource.PlayOneShot(_transformIntoBatSoundEffect);
       _spriteRenderer.sprite = _humanSprite;
     }
     else {
+      _boxCollider.size = _boxColliderSizeWhenBat;
+      _boxCollider.offset = _boxColliderOffsetWhenBat;
       _audioSource.PlayOneShot(_transformIntoHumanSoundEffect);
       _spriteRenderer.sprite = _batSprite;
     }
