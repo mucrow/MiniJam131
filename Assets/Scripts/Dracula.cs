@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Dracula: MonoBehaviour {
+  [SerializeField] Rigidbody2D _rigidbody2D;
+
   [SerializeField] Sprite _humanSprite;
   [SerializeField] Sprite _batSprite;
   [SerializeField] SpriteRenderer _spriteRenderer;
@@ -21,26 +23,26 @@ public class Dracula: MonoBehaviour {
     var runLeft = Input.GetKey(KeyCode.A);
     var runRight = Input.GetKey(KeyCode.D);
 
-    var moveInput = transform.position;
+    var moveInput = Vector2.zero;
 
     if (runLeft) {
-      moveInput.x -= speed * Time.deltaTime;
+      moveInput.x -= 1;
     }
     if (runRight) {
-      moveInput.x += speed * Time.deltaTime;
+      moveInput.x += 1;
     }
     if (runDown) {
-      moveInput.y -= speed * Time.deltaTime;
+      moveInput.y -= 1;
     }
     if (runUp) {
-      moveInput.y += speed * Time.deltaTime;
+      moveInput.y += 1;
     }
 
     // if (transformKeyDown) {
     //   ToggleForm();
     // }
 
-    transform.position = moveInput;
+    _rigidbody2D.velocity = moveInput.normalized * speed;
   }
 
   public void ToggleForm() {
