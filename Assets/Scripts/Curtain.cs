@@ -5,13 +5,18 @@ using UnityEngine;
 public class Curtain : MonoBehaviour
 {
     float _curtainOpenTimer = 2f;
-    SpriteRenderer sprite;
+    
+    [SerializeField] Sprite _openCurtainSprite;
+    [SerializeField] Sprite _closedCurtainSprite;
+    SpriteRenderer spriteRenderer;
+    
+    
     bool _isOpen = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -27,12 +32,11 @@ public class Curtain : MonoBehaviour
     void ToggleOpen()
     {
         if (_isOpen){
-            // open it
-            sprite.color = new Color(1, 0, 0, 1);
+            spriteRenderer.sprite = _closedCurtainSprite;
         }
         else {
-            // close it
-            sprite.color = new Color(1, 1, 1, 1);
+            
+            spriteRenderer.sprite = _openCurtainSprite;
         }
         _isOpen = !_isOpen;
     }
