@@ -54,7 +54,7 @@ public class HorizontalLightSource: MonoBehaviour {
     else {
       particle.Show();
     }
-    particle.SetVelocity(Vector2.down);
+    particle.SetVelocity(Vector2.left);
   }
 
   GameObject PickRandomParticlePrefab() {
@@ -66,11 +66,11 @@ public class HorizontalLightSource: MonoBehaviour {
     float padding = 0.1f;
     var bounds = _collider.bounds;
 
-    float minX = Mathf.Min(bounds.min.x + padding, bounds.center.x);
-    float maxX = Mathf.Max(bounds.max.x - padding, bounds.center.x);
-
-    float x = Random.Range(minX, maxX);
-    float y = Mathf.Max(bounds.max.y - padding, bounds.center.y);
+    float minY = Mathf.Min(bounds.center.y, bounds.min.y + padding);
+    float maxY = Mathf.Max(bounds.center.y, bounds.min.y - padding);
+ 
+    float x = Mathf.Max(bounds.max.x - padding, bounds.center.x);
+    float y = Random.Range(minY, maxY);
 
     return new Vector3(x, y, 0);
   }
