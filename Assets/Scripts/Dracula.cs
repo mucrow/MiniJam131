@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class Dracula: MonoBehaviour {
   [SerializeField] Rigidbody2D _rigidbody2D;
+  [SerializeField] LoopingSpriteAnimator _spriteAnimator;
 
-  [SerializeField] Sprite _humanSprite;
-  [SerializeField] Sprite _batSprite;
-  [SerializeField] SpriteRenderer _spriteRenderer;
+  [SerializeField] Sprite[] _humanIdleDownAnimationFrames;
+  [SerializeField] Sprite[] _batIdleDownAnimationFrames;
 
   [SerializeField] AudioClip _transformIntoBatSoundEffect;
   [SerializeField] AudioClip _transformIntoHumanSoundEffect;
@@ -34,6 +34,11 @@ public class Dracula: MonoBehaviour {
     }
 
     var transformKeyDown = Input.GetKeyDown(KeyCode.Space);
+
+    if (transformKeyDown) {
+      ToggleForm();
+    }
+
     var runDown = Input.GetKey(KeyCode.S);
     var runUp = Input.GetKey(KeyCode.W);
     var runLeft = Input.GetKey(KeyCode.A);
@@ -63,13 +68,13 @@ public class Dracula: MonoBehaviour {
       _boxCollider.size = _boxColliderSizeWhenHuman;
       _boxCollider.offset = _boxColliderOffsetWhenHuman;
       _audioSource.PlayOneShot(_transformIntoBatSoundEffect);
-      _spriteRenderer.sprite = _humanSprite;
+      _spriteAnimator.SetAnimationFrames(_humanIdleDownAnimationFrames);
     }
     else {
       _boxCollider.size = _boxColliderSizeWhenBat;
       _boxCollider.offset = _boxColliderOffsetWhenBat;
       _audioSource.PlayOneShot(_transformIntoHumanSoundEffect);
-      _spriteRenderer.sprite = _batSprite;
+      _spriteAnimator.SetAnimationFrames(_batIdleDownAnimationFrames);
       _batTimer = 2f;
     }
   }
