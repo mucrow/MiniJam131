@@ -2,43 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Curtain : MonoBehaviour
-{
-    float _curtainOpenTimer = 2f;
-    
-    [SerializeField] Sprite _openCurtainSprite;
-    [SerializeField] Sprite _closedCurtainSprite;
-    SpriteRenderer spriteRenderer;
-    
-    
-    bool _isOpen = true;
+public class Curtain: MonoBehaviour {
+  float _curtainOpenTimer = 2f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+  [SerializeField] Sprite _openCurtainSprite;
+  [SerializeField] Sprite _closedCurtainSprite;
+  [SerializeField] SpriteRenderer _spriteRenderer;
+  [SerializeField] LightSource _lightSource;
+
+  [SerializeField] bool _isOpen = false;
+
+  void Start() {
+    OnIsOpenChanged();
+  }
+
+  // Update is called once per frame
+  void Update() {
+    _curtainOpenTimer -= Time.deltaTime;
+    if (_curtainOpenTimer <= 0f) {
+      _curtainOpenTimer = 2f;
+      ToggleOpen();
     }
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        _curtainOpenTimer -= Time.deltaTime;
-        if (_curtainOpenTimer <= 0f) {
-            _curtainOpenTimer = 2f;
-            ToggleOpen();
-        }
+  void ToggleOpen() {
+    _isOpen = !_isOpen;
+    OnIsOpenChanged();
+  }
+
+  void OnIsOpenChanged() {
+    if (_isOpen) {
+      _spriteRenderer.sprite = _openCurtainSprite;
+      _lightSource.Show();
     }
-
-    void ToggleOpen()
-    {
-        if (_isOpen){
-            spriteRenderer.sprite = _closedCurtainSprite;
-        }
-        else {
-            
-            spriteRenderer.sprite = _openCurtainSprite;
-        }
-        _isOpen = !_isOpen;
+    else {
+      _spriteRenderer.sprite = _closedCurtainSprite;
+      _lightSource.Hide();
     }
-
+  }
 }
