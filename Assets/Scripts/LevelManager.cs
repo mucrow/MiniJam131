@@ -12,6 +12,7 @@ public class LevelManager: MonoBehaviour {
 
   [SerializeField] AudioClip _introMusic;
   [SerializeField] AudioClip _gameplayMusic;
+  [SerializeField] AudioClip _batGameplayMusic;
 
   enum State {
     ShowingHowToPlay,
@@ -45,7 +46,7 @@ public class LevelManager: MonoBehaviour {
     }
     else if (_state == State.ShowingSpaceToStartOverlay) {
       if (spacePressed) {
-        AudioManager.Instance.PlaySong(_gameplayMusic);
+        AudioManager.Instance.PlaySongWithBSide(_gameplayMusic, _batGameplayMusic);
         HideDialog(_spaceToStartOverlay);
         _introShown = true;
         _state = State.Gameplay;
