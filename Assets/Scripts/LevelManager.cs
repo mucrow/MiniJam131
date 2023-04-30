@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager: MonoBehaviour {
-  static bool _introShown = false;
+  public static LevelManager Instance;
+
+  bool _introShown = false;
 
   [SerializeField] CanvasGroup _howToPlayDialog;
   [SerializeField] CanvasGroup _spaceToStartOverlay;
@@ -13,6 +15,8 @@ public class LevelManager: MonoBehaviour {
   [SerializeField] AudioClip _introMusic;
   [SerializeField] AudioClip _gameplayMusic;
   [SerializeField] AudioClip _batGameplayMusic;
+
+  [SerializeField] Timer _timer;
 
   enum State {
     ShowingHowToPlay,
@@ -23,6 +27,16 @@ public class LevelManager: MonoBehaviour {
   }
 
   State _state;
+
+  void Awake() {
+    if (Instance == null) {
+      DontDestroyOnLoad(gameObject);
+      Instance = this;
+    }
+    else {
+      Destroy(gameObject);
+    }
+  }
 
   void Start() {
     if (_introShown) {
@@ -49,6 +63,7 @@ public class LevelManager: MonoBehaviour {
         AudioManager.Instance.PlaySongWithBSide(_gameplayMusic, _batGameplayMusic);
         HideDialog(_spaceToStartOverlay);
         _introShown = true;
+        _timer.StartTimer();
         _state = State.Gameplay;
       }
     }
