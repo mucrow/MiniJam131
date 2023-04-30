@@ -35,10 +35,6 @@ public class Dracula: MonoBehaviour {
 
     var transformKeyDown = Input.GetKeyDown(KeyCode.Space);
 
-    if (transformKeyDown) {
-      ToggleForm();
-    }
-
     var runDown = Input.GetKey(KeyCode.S);
     var runUp = Input.GetKey(KeyCode.W);
     var runLeft = Input.GetKey(KeyCode.A);
