@@ -525,6 +525,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56505e68ef9b27c4fb33edc475c80b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dracula: {fileID: 0}
+  triggerActive: 0
 --- !u!1 &557144314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7108938969738135566, guid: e8be3894e7739b24c84d67971b613f4b, type: 3}
@@ -3234,6 +3236,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2582793843768750598, guid: a92d5ec45d123c346b9610b9cd2293b7, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2582793843768750598, guid: a92d5ec45d123c346b9610b9cd2293b7, type: 3}
+      propertyPath: m_Size.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5675928241576678104, guid: a92d5ec45d123c346b9610b9cd2293b7, type: 3}
       propertyPath: m_RootOrder
       value: 5

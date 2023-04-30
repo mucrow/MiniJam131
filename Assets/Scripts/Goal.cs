@@ -1,33 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
-    [SerializeField] Dracula _dracula;
-    [SerializeField] private bool triggerActive = false;
-    
-    public void OnTriggerEnter2D(Collider2D other) {
+    public void OnTriggerEnter2D(Collider2D other)
+    {
         {
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
             if (other.CompareTag("Player"))
             {
-                Debug.Log("Entered");
-                triggerActive = true;
+                // TODO: Add dialogue pop-up
+                if (currentScene < SceneManager.GetAllScenes().Length)
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+                else
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
             }
-        }
-    }
- 
-    public void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            triggerActive = false;
-        }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
     }
 }
