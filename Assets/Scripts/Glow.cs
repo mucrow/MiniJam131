@@ -18,4 +18,10 @@ public class Glow: MonoBehaviour {
       }
     }
   }
+
+  void ShrinkLight(int deathCount)
+  {
+    // transform.localScale (Vector3)
+  }
+
 }
