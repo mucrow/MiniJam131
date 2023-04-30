@@ -504,7 +504,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: -200, y: -31.999985}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &313576608
@@ -3597,6 +3597,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightSource
       objectReference: {fileID: 0}
+    - target: {fileID: 7215134313719221943, guid: 528540b9752176f4986bc95adc914778, type: 3}
+      propertyPath: dracula
+      value: 
+      objectReference: {fileID: 773096075}
     - target: {fileID: 7215134313719221943, guid: 528540b9752176f4986bc95adc914778, type: 3}
       propertyPath: _levelManager
       value: 
