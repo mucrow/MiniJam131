@@ -12,7 +12,10 @@ public class LightSource: MonoBehaviour {
 
   [SerializeField] float _emitTimerDuration;
 
+  List<LightParticle> _particles = new List<LightParticle>();
+
   float _emitTimer;
+  bool _isHidden = false;
 
   void Start() {
     _emitTimer = _emitTimerDuration;
@@ -22,12 +25,34 @@ public class LightSource: MonoBehaviour {
     _emitTimer -= Time.deltaTime;
     if (_emitTimer <= 0f) {
       _emitTimer += _emitTimerDuration;
-      GameObject particlePrefab = PickRandomParticlePrefab();
-      var initPosition = GetRandomizedParticleInitPosition();
-      var particleObject = Instantiate(particlePrefab, initPosition, Quaternion.identity, _particlesFolder);
-      var particle = particleObject.GetComponent<LightParticle>();
-      particle.SetVelocity(Vector2.down);
+      if (_particles.Count < 100) {
+        CreateParticle();
+      }
     }
+
+    var particleDeathThreshold = _collider.bounds.min.y - 0.25f;
+    foreach (var particle in _particles) {
+      var particleY = particle.transform.position.y;
+      if (particleY <= particleDeathThreshold) {
+        Destroy(particle.gameObject);
+      }
+    }
+  }
+
+  void CreateParticle() {
+    GameObject particlePrefab = PickRandomParticlePrefab();
+    var initPosition = GetRandomizedParticleInitPosition();
+    var particleObject = Instantiate(particlePrefab, initPosition, Quaternion.identity, _particlesFolder);
+    var particle = particleObject.GetComponent<LightParticle>();
+    _particles.Add(particle);
+    particle.SetParent(this);
+    if (_isHidden) {
+      particle.Hide();
+    }
+    else {
+      particle.Show();
+    }
+    particle.SetVelocity(Vector2.down);
   }
 
   GameObject PickRandomParticlePrefab() {
@@ -48,13 +73,23 @@ public class LightSource: MonoBehaviour {
     return new Vector3(x, y, 0);
   }
 
+  public void NotifyLightParticleDied(LightParticle particle) {
+    _particles.Remove(particle);
+  }
+
   public void Show() {
+    _isHidden = false;
     _glowSpriteRenderer.enabled = true;
-    _particlesFolder.gameObject.SetActive(true);
+    foreach (var particle in _particles) {
+      particle.Show();
+    }
   }
 
   public void Hide() {
+    _isHidden = true;
     _glowSpriteRenderer.enabled = false;
-    _particlesFolder.gameObject.SetActive(false);
+    foreach (var particle in _particles) {
+      particle.Hide();
+    }
   }
 }

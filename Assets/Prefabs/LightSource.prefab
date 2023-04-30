@@ -116,8 +116,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1265233441
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 0.91540486, b: 0.4188679, a: 0.21960784}
@@ -182,7 +182,7 @@ MonoBehaviour:
   - {fileID: 3766401584385601457, guid: fef67f1f1712ac341b30b8a36e8a5a51, type: 3}
   - {fileID: 5090118846829480759, guid: 7a25fd197600ba04889ca72d336b7a40, type: 3}
   _particlesFolder: {fileID: 859410618753904117}
-  _glowSpriteRenderer: {fileID: 0}
+  _glowSpriteRenderer: {fileID: 4035350460856616947}
   _emitTimerDuration: 0.8
 --- !u!1 &7671597956311412605
 GameObject:

@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5609498891126160393
 SpriteRenderer:
@@ -99,3 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _openCurtainSprite: {fileID: -1085203270, guid: 168e65426df281046b7df651e5492023, type: 3}
   _closedCurtainSprite: {fileID: 1294130267, guid: 168e65426df281046b7df651e5492023, type: 3}
+  _spriteRenderer: {fileID: 5609498891126160393}
+  _lightSource: {fileID: 0}
