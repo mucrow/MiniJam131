@@ -14,8 +14,10 @@ public class LightSource: MonoBehaviour {
 
   List<LightParticle> _particles = new List<LightParticle>();
 
+  private Vector3 _previousSize;
+
   float _emitTimer;
-  bool _isHidden = false;
+  public bool _isHidden = false;
 
   void Start() {
     _emitTimer = _emitTimerDuration;
@@ -80,6 +82,7 @@ public class LightSource: MonoBehaviour {
   public void Show() {
     _isHidden = false;
     _glowSpriteRenderer.enabled = true;
+    _collider.size = _previousSize;
     foreach (var particle in _particles) {
       particle.Show();
     }
@@ -88,6 +91,8 @@ public class LightSource: MonoBehaviour {
   public void Hide() {
     _isHidden = true;
     _glowSpriteRenderer.enabled = false;
+    _previousSize = _collider.size;
+    _collider.size = new Vector3(0, 0, 0);
     foreach (var particle in _particles) {
       particle.Hide();
     }

@@ -21,7 +21,7 @@ public class Dracula: MonoBehaviour {
   [SerializeField] Vector2 _boxColliderSizeWhenHuman;
 
   bool _isHuman = true;
-  public float speed = 6f;
+  public float speed = 3f;
 
   float _batTimer = 0f;
 
