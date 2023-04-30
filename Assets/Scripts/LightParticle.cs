@@ -9,6 +9,7 @@ public class LightParticle: MonoBehaviour {
   [SerializeField] SpriteRenderer _spriteRenderer;
 
   LightSource _lightSource;
+  HorizontalLightSource _horizontalLightSource;
 
   void Start() {
     var angularSpeed = Random.Range(30f, 90f);
@@ -22,6 +23,10 @@ public class LightParticle: MonoBehaviour {
 
   public void SetParent(LightSource lightSource) {
     _lightSource = lightSource;
+  }
+  
+  public void SetParent(HorizontalLightSource horizontalLightSource) {
+    _horizontalLightSource = horizontalLightSource;
   }
 
   public void SetVelocity(Vector2 velocity) {
