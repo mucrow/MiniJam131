@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager: MonoBehaviour {
+  static bool _introShown = false;
+
   [SerializeField] CanvasGroup _howToPlayDialog;
   [SerializeField] CanvasGroup _spaceToStartOverlay;
   [SerializeField] CanvasGroup _deathOverlay;
+
+  [SerializeField] AudioClip _introMusic;
+  [SerializeField] AudioClip _gameplayMusic;
 
   enum State {
     ShowingHowToPlay,
@@ -19,8 +24,14 @@ public class LevelManager: MonoBehaviour {
   State _state;
 
   void Start() {
-    ShowDialog(_howToPlayDialog);
-    _state = State.ShowingHowToPlay;
+    if (_introShown) {
+      _state = State.Gameplay;
+    }
+    else {
+      AudioManager.Instance.PlaySong(_introMusic);
+      ShowDialog(_howToPlayDialog);
+      _state = State.ShowingHowToPlay;
+    }
   }
 
   void Update() {
@@ -34,7 +45,9 @@ public class LevelManager: MonoBehaviour {
     }
     else if (_state == State.ShowingSpaceToStartOverlay) {
       if (spacePressed) {
+        AudioManager.Instance.PlaySong(_gameplayMusic);
         HideDialog(_spaceToStartOverlay);
+        _introShown = true;
         _state = State.Gameplay;
       }
     }
