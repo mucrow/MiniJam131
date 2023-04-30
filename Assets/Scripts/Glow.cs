@@ -3,26 +3,16 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class Glow : MonoBehaviour
-{
-    [SerializeField] LightSource lightSource;
-    private Collider2D _collider;
+public class Glow: MonoBehaviour {
+  [SerializeField] AudioSource _audioSource;
+  [SerializeField] AudioClip _deathSound;
+  [SerializeField] LevelManager _levelManager;
 
-    void OnTriggerEnter2D(Collider2D collision) 
-    {   
-        if (collision.CompareTag("Player")){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+  void OnTriggerEnter2D(Collider2D collision) {
+    if (collision.CompareTag("Player")) {
+      Destroy(collision.gameObject);
+      _audioSource.PlayOneShot(_deathSound);
+      _levelManager.OnPlayerDied();
     }
-    void Start()
-    {
-        _collider = GetComponent<Collider2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+  }
 }
