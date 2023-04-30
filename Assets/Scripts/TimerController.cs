@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Timer : MonoBehaviour
-{
+public class Timer: MonoBehaviour {
     public float timeElapsed = 0;
     public bool timerIsRunning = false;
     public Text timeText;
