@@ -8,11 +8,9 @@ public class Glow: MonoBehaviour {
   [SerializeField] AudioClip _deathSound;
   [SerializeField] LevelManager _levelManager;
 
-  [SerializeField] Dracula dracula;
-
   void OnTriggerEnter2D(Collider2D collision) {
     if (collision.CompareTag("Player")) {
-      if (dracula._isHuman) {
+      if (collision.GetComponent<Dracula>()._isHuman) {
         Destroy(collision.gameObject);
         _audioSource.PlayOneShot(_deathSound);
         _levelManager.OnPlayerDied();

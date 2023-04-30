@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Statue : MonoBehaviour
 {
-    [SerializeField] Dracula _dracula;
+    Dracula _dracula;
     [SerializeField] private bool triggerActive = false;
 
-    public void OnTriggerEnter2D(Collider2D other) {
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
-            {
-                Debug.Log("Entered");
-                triggerActive = true;
-            }
+            _dracula = other.GetComponent<Dracula>();
+            Debug.Log("Entered");
+            triggerActive = true;
         }
     }
- 
+
     public void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -33,5 +33,5 @@ public class Statue : MonoBehaviour
             _dracula.ToggleForm();
         }
     }
- 
+
 }
