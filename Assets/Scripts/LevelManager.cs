@@ -28,6 +28,8 @@ public class LevelManager: MonoBehaviour {
 
   State _state;
 
+  private int deathCount;
+
   void Awake() {
     if (Instance == null) {
       DontDestroyOnLoad(gameObject);
@@ -91,5 +93,11 @@ public class LevelManager: MonoBehaviour {
   public void OnPlayerDied() {
     ShowDialog(_deathOverlay);
     _state = State.Death;
+    deathCount+=1;
+    Debug.Log("Deaths: " + deathCount);
+  }
+
+  public int GetDeathCount() {
+    return deathCount;
   }
 }
