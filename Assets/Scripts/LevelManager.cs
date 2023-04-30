@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager: MonoBehaviour {
   [SerializeField] CanvasGroup _howToPlayDialog;
   [SerializeField] CanvasGroup _spaceToStartOverlay;
+  [SerializeField] CanvasGroup _deathOverlay;
 
   enum State {
     ShowingHowToPlay,
     ShowingSpaceToStartOverlay,
     Gameplay,
+    Death,
     Victory,
   }
 
@@ -35,6 +38,13 @@ public class LevelManager: MonoBehaviour {
         _state = State.Gameplay;
       }
     }
+    else if (_state == State.Death) {
+      if (spacePressed) {
+        HideDialog(_deathOverlay);
+        _state = State.Gameplay;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+      }
+    }
   }
 
   void ShowDialog(CanvasGroup dialog) {
@@ -47,5 +57,10 @@ public class LevelManager: MonoBehaviour {
     dialog.blocksRaycasts = false;
     dialog.alpha = 0f;
     Time.timeScale = 1f;
+  }
+
+  public void OnPlayerDied() {
+    ShowDialog(_deathOverlay);
+    _state = State.Death;
   }
 }

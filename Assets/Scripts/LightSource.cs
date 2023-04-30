@@ -14,12 +14,15 @@ public class LightSource: MonoBehaviour {
 
   List<LightParticle> _particles = new List<LightParticle>();
 
-  private Vector3 _previousSize;
+  Bounds _initialColliderBounds;
+  Vector3 _previousSize;
 
   float _emitTimer;
   public bool _isHidden = false;
 
-  void Start() {
+  void Awake() {
+    _initialColliderBounds = _collider.bounds;
+    _previousSize = _collider.size;
     _emitTimer = _emitTimerDuration;
   }
 
@@ -32,7 +35,7 @@ public class LightSource: MonoBehaviour {
       }
     }
 
-    var particleDeathThreshold = _collider.bounds.min.y - 0.25f;
+    var particleDeathThreshold = _initialColliderBounds.min.y - 0.25f;
     foreach (var particle in _particles) {
       var particleY = particle.transform.position.y;
       if (particleY <= particleDeathThreshold) {
@@ -64,7 +67,7 @@ public class LightSource: MonoBehaviour {
 
   Vector3 GetRandomizedParticleInitPosition() {
     float padding = 0.1f;
-    var bounds = _collider.bounds;
+    var bounds = _initialColliderBounds;
 
     float minX = Mathf.Min(bounds.min.x + padding, bounds.center.x);
     float maxX = Mathf.Max(bounds.max.x - padding, bounds.center.x);
