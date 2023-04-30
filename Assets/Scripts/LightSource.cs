@@ -12,7 +12,7 @@ public class LightSource: MonoBehaviour {
 
   [SerializeField] float _emitTimerDuration;
 
-  [SerializeField] List<LightParticle> _particles = new List<LightParticle>();
+  List<LightParticle> _particles = new List<LightParticle>();
 
   float _emitTimer;
   bool _isHidden = false;
@@ -30,9 +30,9 @@ public class LightSource: MonoBehaviour {
       }
     }
 
-    var particleDeathThreshold = _collider.bounds.min.y;
+    var particleDeathThreshold = _collider.bounds.min.y - 0.25f;
     foreach (var particle in _particles) {
-      var particleY = particle.transform.position.y - 0.25f;
+      var particleY = particle.transform.position.y;
       if (particleY <= particleDeathThreshold) {
         Destroy(particle.gameObject);
       }
