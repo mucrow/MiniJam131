@@ -61,12 +61,14 @@ public class Dracula: MonoBehaviour {
   public void ToggleForm() {
     _isHuman = !_isHuman;
     if (_isHuman) {
+      AudioManager.Instance.SwitchToASide();
       _boxCollider.size = _boxColliderSizeWhenHuman;
       _boxCollider.offset = _boxColliderOffsetWhenHuman;
       _audioSource.PlayOneShot(_transformIntoBatSoundEffect);
       _spriteAnimator.SetAnimationFrames(_humanIdleDownAnimationFrames);
     }
     else {
+      AudioManager.Instance.SwitchToBSide();
       _boxCollider.size = _boxColliderSizeWhenBat;
       _boxCollider.offset = _boxColliderOffsetWhenBat;
       _audioSource.PlayOneShot(_transformIntoHumanSoundEffect);
