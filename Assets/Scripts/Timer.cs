@@ -6,23 +6,31 @@ using UnityEngine.UI;
 public class Timer: MonoBehaviour {
     [FormerlySerializedAs("timeText")] [SerializeField] Text timerText;
 
-    float timeElapsed = 0f;
+    public float TimeElapsed = 0f;
     bool timerIsRunning = false;
 
     public void StartTimer() {
         timerIsRunning = true;
     }
 
+    public void StopTimer() {
+        timerIsRunning = false;
+    }
+
     void Update() {
         if (timerIsRunning) {
-            timeElapsed += Time.unscaledDeltaTime;
-            DisplayTime(timeElapsed);
+            TimeElapsed += Time.unscaledDeltaTime;
+            DisplayTime(TimeElapsed);
         }
     }
 
     void DisplayTime(float timeToDisplay) {
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
+        timerText.text = FormatTime(timeToDisplay);
+    }
+
+    public string FormatTime(float timeToDisplay) {
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

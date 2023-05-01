@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ public class LevelManager: MonoBehaviour {
   [SerializeField] CanvasGroup _howToPlayDialog;
   [SerializeField] CanvasGroup _spaceToStartOverlay;
   [SerializeField] CanvasGroup _deathOverlay;
+  [SerializeField] CanvasGroup _winPanel;
+  [SerializeField] TMP_Text _winText;
 
   [SerializeField] AudioClip _introMusic;
   [SerializeField] AudioClip _gameplayMusic;
@@ -28,7 +31,7 @@ public class LevelManager: MonoBehaviour {
 
   State _state;
 
-  private int deathCount;
+  int deathCount;
 
   void Awake() {
     if (Instance == null) {
@@ -45,7 +48,7 @@ public class LevelManager: MonoBehaviour {
       _state = State.Gameplay;
     }
     else {
-      AudioManager.Instance.PlaySong(_introMusic);
+      AudioManager.Instance.PlaySongWithBSide(_gameplayMusic, _batGameplayMusic);
       ShowDialog(_howToPlayDialog);
       _state = State.ShowingHowToPlay;
     }
@@ -62,7 +65,6 @@ public class LevelManager: MonoBehaviour {
     }
     else if (_state == State.ShowingSpaceToStartOverlay) {
       if (spacePressed) {
-        AudioManager.Instance.PlaySongWithBSide(_gameplayMusic, _batGameplayMusic);
         HideDialog(_spaceToStartOverlay);
         _introShown = true;
         _timer.StartTimer();
@@ -99,5 +101,13 @@ public class LevelManager: MonoBehaviour {
 
   public int GetDeathCount() {
     return deathCount;
+  }
+
+  public void ShowWinScreenUI() {
+    _timer.StopTimer();
+    AudioManager.Instance.PlaySong(_introMusic);
+    var formattedTime = _timer.FormatTime(_timer.TimeElapsed);
+    _winText.text = "Total time: " + formattedTime + "\nTotal deaths: " + deathCount;
+    ShowDialog(_winPanel);
   }
 }
