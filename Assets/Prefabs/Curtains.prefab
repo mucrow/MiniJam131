@@ -101,3 +101,5 @@ MonoBehaviour:
   _closedCurtainSprite: {fileID: 1294130267, guid: 168e65426df281046b7df651e5492023, type: 3}
   _spriteRenderer: {fileID: 5609498891126160393}
   _lightSource: {fileID: 0}
+  _horizontalLightSource: {fileID: 0}
+  _isOpen: 1

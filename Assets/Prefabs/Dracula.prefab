@@ -73,7 +73,7 @@ MonoBehaviour:
   _walkPoseSet: {fileID: 8567917783264167764}
   _batPoseSet: {fileID: 4299167923231283767}
   _isHuman: 1
-  speed: 4
+  speed: 5
 --- !u!114 &4084901273053321997
 MonoBehaviour:
   m_ObjectHideFlags: 0
