@@ -20,10 +20,23 @@ public class Dracula: MonoBehaviour {
   [SerializeField] Vector2 _boxColliderOffsetWhenHuman;
   [SerializeField] Vector2 _boxColliderSizeWhenHuman;
 
+  [SerializeField] DraculaPoseSet _idlePoseSet;
+  [SerializeField] DraculaPoseSet _walkPoseSet;
+  [SerializeField] DraculaPoseSet _batPoseSet;
+  DraculaPoseSet _activePoseSet;
+
   public bool _isHuman = true;
-  public float speed = 3f;
+  [SerializeField] float speed = 1.6f;
 
   float _batTimer = 0f;
+
+  Vector2 _moveInputBeforeIdle = Vector2.down;
+  Vector2 _previousMoveInput = Vector2.zero;
+  Vector2 _moveInput = Vector2.zero;
+
+  void Awake() {
+    _activePoseSet = _idlePoseSet;
+  }
 
   void Update() {
     if (!_isHuman) {
@@ -40,22 +53,29 @@ public class Dracula: MonoBehaviour {
     var runLeft = Input.GetKey(KeyCode.A);
     var runRight = Input.GetKey(KeyCode.D);
 
-    var moveInput = Vector2.zero;
-
+    _previousMoveInput = _moveInput;
+    _moveInput = Vector2.zero;
     if (runLeft) {
-      moveInput.x -= 1;
+      _moveInput.x -= 1;
     }
     if (runRight) {
-      moveInput.x += 1;
+      _moveInput.x += 1;
     }
     if (runDown) {
-      moveInput.y -= 1;
+      _moveInput.y -= 1;
     }
     if (runUp) {
-      moveInput.y += 1;
+      _moveInput.y += 1;
     }
 
-    _rigidbody2D.velocity = moveInput.normalized * speed;
+    if (_moveInput != _previousMoveInput) {
+      if (_moveInput == Vector2.zero) {
+        _moveInputBeforeIdle = _previousMoveInput;
+      }
+      UpdatePoseSet();
+    }
+
+    _rigidbody2D.velocity = _moveInput.normalized * speed;
   }
 
   public void ToggleForm() {
@@ -65,15 +85,46 @@ public class Dracula: MonoBehaviour {
       _boxCollider.size = _boxColliderSizeWhenHuman;
       _boxCollider.offset = _boxColliderOffsetWhenHuman;
       _audioSource.PlayOneShot(_transformIntoBatSoundEffect);
-      _spriteAnimator.SetAnimationFrames(_humanIdleDownAnimationFrames);
+      UpdatePoseSet();
     }
     else {
       AudioManager.Instance.SwitchToBSide();
       _boxCollider.size = _boxColliderSizeWhenBat;
       _boxCollider.offset = _boxColliderOffsetWhenBat;
       _audioSource.PlayOneShot(_transformIntoHumanSoundEffect);
-      _spriteAnimator.SetAnimationFrames(_batIdleDownAnimationFrames);
+      UpdatePoseSet();
       _batTimer = 2f;
     }
+  }
+
+  void UpdatePoseSet() {
+    var isMoving = _moveInput != Vector2.zero;
+    var direction = isMoving ? _moveInput : _moveInputBeforeIdle;
+
+    if (!_isHuman) {
+      _activePoseSet = _batPoseSet;
+    }
+    else {
+      _activePoseSet = isMoving ? _walkPoseSet : _idlePoseSet;
+    }
+
+    var anim = GetAnimationFromPoseSet(_activePoseSet, direction);
+    _spriteAnimator.SetAnimationFrames(anim);
+  }
+
+  Sprite[] GetAnimationFromPoseSet(DraculaPoseSet poseSet, Vector2 direction) {
+    if (direction.y < 0f) {
+      return poseSet.Down;
+    }
+    if (direction.y > 0f) {
+      return poseSet.Up;
+    }
+    if (direction.x < 0f) {
+      return poseSet.Left;
+    }
+    if (direction.x > 0f) {
+      return poseSet.Right;
+    }
+    return poseSet.Down;
   }
 }
