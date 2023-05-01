@@ -15,7 +15,7 @@ public class Timer: MonoBehaviour {
 
     void Update() {
         if (timerIsRunning) {
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
             DisplayTime(timeElapsed);
         }
     }

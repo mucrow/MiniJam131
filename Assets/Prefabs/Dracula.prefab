@@ -180,10 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 4357139974149044265}
   _animationFrames:
-  - {fileID: 153286257, guid: 1bf9103407e2c0345a765e0bf1875324, type: 3}
-  - {fileID: 249588019, guid: 1bf9103407e2c0345a765e0bf1875324, type: 3}
-  - {fileID: -14607664, guid: 1bf9103407e2c0345a765e0bf1875324, type: 3}
-  - {fileID: 2004031735, guid: 1bf9103407e2c0345a765e0bf1875324, type: 3}
+  - {fileID: -679943936, guid: f87ced3f6cd942945972bc2822222fde, type: 3}
   _timePerFrame: 0.3
 --- !u!212 &4357139974149044265
 SpriteRenderer:

@@ -38,6 +38,10 @@ public class Dracula: MonoBehaviour {
     _activePoseSet = _idlePoseSet;
   }
 
+  void Start() {
+    UpdatePoseSet();
+  }
+
   void Update() {
     if (!_isHuman) {
       _batTimer -= Time.deltaTime;
