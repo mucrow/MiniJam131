@@ -65,8 +65,8 @@ MonoBehaviour:
   _transformIntoHumanSoundEffect: {fileID: 8300000, guid: 91f2bea66103f0b4cbc6fa90503f01be, type: 3}
   _audioSource: {fileID: 6380484784100191337}
   _boxCollider: {fileID: 85399752673210851}
-  _boxColliderOffsetWhenBat: {x: 0, y: 0.42}
-  _boxColliderSizeWhenBat: {x: 0.9444444, y: 0.4054082}
+  _boxColliderOffsetWhenBat: {x: 0, y: 0.39}
+  _boxColliderSizeWhenBat: {x: 0.75, y: 0.4054082}
   _boxColliderOffsetWhenHuman: {x: 0, y: 0.113625586}
   _boxColliderSizeWhenHuman: {x: 0.75, y: 0.75}
   _idlePoseSet: {fileID: 4084901273053321997}
@@ -226,7 +226,7 @@ SpriteRenderer:
   m_SortingLayerID: 1605351011
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 153286257, guid: 1bf9103407e2c0345a765e0bf1875324, type: 3}
+  m_Sprite: {fileID: -679943936, guid: f87ced3f6cd942945972bc2822222fde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -369,7 +369,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.25}
-    oldSize: {x: 1, y: 1.4569893}
+    oldSize: {x: 1.0941176, y: 1.5941176}
     newSize: {x: 0.9444444, y: 1.7777778}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

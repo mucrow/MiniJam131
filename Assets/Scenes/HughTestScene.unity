@@ -2020,10 +2020,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Statue
       objectReference: {fileID: 0}
-    - target: {fileID: 4674642392859334824, guid: a932369dcfc52314b9d404464e045ce1, type: 3}
-      propertyPath: _dracula
-      value: 
-      objectReference: {fileID: 773096075}
     - target: {fileID: 9133368445472705292, guid: a932369dcfc52314b9d404464e045ce1, type: 3}
       propertyPath: m_RootOrder
       value: 2
