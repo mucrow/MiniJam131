@@ -146,7 +146,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 496496313740954255}
   _deathSound: {fileID: 8300000, guid: 74b32c61c231a78498eb8c5a8ffb32fc, type: 3}
-  _levelManager: {fileID: 0}
 --- !u!82 &496496313740954255
 AudioSource:
   m_ObjectHideFlags: 0
@@ -158,7 +157,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

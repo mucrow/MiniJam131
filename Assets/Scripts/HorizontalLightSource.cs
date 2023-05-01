@@ -16,8 +16,14 @@ public class HorizontalLightSource: MonoBehaviour {
 
   private Vector3 _previousSize;
 
+  Bounds _initialColliderBounds;
+
   float _emitTimer;
   public bool _isHidden = false;
+
+  void Awake() {
+    _initialColliderBounds = _collider.bounds;
+  }
 
   void Start() {
     _emitTimer = _emitTimerDuration;
@@ -32,10 +38,10 @@ public class HorizontalLightSource: MonoBehaviour {
       }
     }
 
-    var particleDeathThreshold = _collider.bounds.min.y - 0.25f;
+    var particleDeathThreshold = _initialColliderBounds.min.x - 0.25f;
     foreach (var particle in _particles) {
-      var particleY = particle.transform.position.y;
-      if (particleY <= particleDeathThreshold) {
+      var particleX = particle.transform.position.x;
+      if (particleX <= particleDeathThreshold) {
         Destroy(particle.gameObject);
       }
     }
@@ -64,7 +70,7 @@ public class HorizontalLightSource: MonoBehaviour {
 
   Vector3 GetRandomizedParticleInitPosition() {
     float padding = 0.1f;
-    var bounds = _collider.bounds;
+    var bounds = _initialColliderBounds;
 
     float minY = Mathf.Min(bounds.center.y, bounds.min.y + padding);
     float maxY = Mathf.Max(bounds.center.y, bounds.min.y - padding);
