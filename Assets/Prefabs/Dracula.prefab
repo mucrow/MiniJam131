@@ -66,9 +66,9 @@ MonoBehaviour:
   _audioSource: {fileID: 6380484784100191337}
   _boxCollider: {fileID: 85399752673210851}
   _boxColliderOffsetWhenBat: {x: 0, y: 0.39}
-  _boxColliderSizeWhenBat: {x: 0.75, y: 0.4054082}
-  _boxColliderOffsetWhenHuman: {x: 0, y: 0.113625586}
-  _boxColliderSizeWhenHuman: {x: 0.75, y: 0.75}
+  _boxColliderSizeWhenBat: {x: 0.5, y: 0.4054082}
+  _boxColliderOffsetWhenHuman: {x: 0, y: 0.1}
+  _boxColliderSizeWhenHuman: {x: 0.5, y: 0.5}
   _idlePoseSet: {fileID: 4084901273053321997}
   _walkPoseSet: {fileID: 8567917783264167764}
   _batPoseSet: {fileID: 4299167923231283767}
@@ -226,7 +226,7 @@ SpriteRenderer:
   m_SortingLayerID: 1605351011
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -679943936, guid: f87ced3f6cd942945972bc2822222fde, type: 3}
+  m_Sprite: {fileID: 1554715794, guid: 3ce00fe4e3e275f429c949e889c6ef01, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -365,7 +365,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.113625586}
+  m_Offset: {x: 0, y: 0.39}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.25}
@@ -376,7 +376,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.75}
+  m_Size: {x: 0.5, y: 0.4054082}
   m_EdgeRadius: 0
 --- !u!50 &3594376320588640057
 Rigidbody2D:
